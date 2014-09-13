@@ -1,0 +1,108 @@
+\documentclass[a4,11pt]{article} \usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage{geometry}
+\geometry{letterpaper}\usepackage{graphicx}\usepackage[danish]{babel}\usepackage{amssymb}\usepackage{fancyhdr}\usepackage{amsmath,amssymb}
+\usepackage{comment}
+\usepackage{caption}
+\usepackage{subfigure}
+\usepackage{fixltx2e}
+\usepackage{changepage}
+\usepackage{listings}
+\DeclareUnicodeCharacter{00A0}{ }\pagestyle{fancy}
+
+% http://tex.stackexchange.com/questions/33519/vertical-line-in-matrix-using-latexit
+% Fix for bmatrix
+\makeatletter
+\renewcommand*\env@matrix[1][*\c@MaxMatrixCols c]{%
+  \hskip -\arraycolsep
+  \let\@ifnextchar\new@ifnextchar
+  \array{#1}}
+\makeatother
+
+% My commands
+\newcommand{\equ}[1]{\begin{align}#1\end{align}}\newcommand{\tb}[1]{\textbf{#1}\\}\newcommand{\tsub}[1]{\textsubscript{#1}}\newcommand{\tsup}[1]{\textsuperscript{#1}}
+% End of my commands\begin{document}
+\section{Opgave}
+
+\subsection{a)}
+\tb{}
+
+Konverter følgende fem decimaltal til hexadecimaltal: 0, 13, 314, 1337, 7913. Giv alle svarene på tre cifre.
+
+
+
+
+\subsection{b)}
+\tb{}
+
+Konverter følgende hexadecimaltal til decimaltal: 800, F2F, FFF, 10, DAD. 
+
+(Tallene er i base 10, med mindre andet er angivet.)
+$$ 800_{16} = 8*256 + 0 * 16 + 0 * 1 = 2048_{10}$$
+$$ F2F_{16} = 15 * 256 + 2 * 16 + 15 * 1 = 3887_{10}$$
+$$ FFF_{16} = 15 * 256 + 15 * 16 + 15 * 1 = 4095_{10}$$
+$$ 10_{16} = 0* 256 + 1 * 16 + 0 * 1 = 16_{10}$$
+$$ DAD_{16} = 14 * 256 + 10 * 16 + 14 * 1 = 3758_{10}$$
+
+\subsection{c)}
+\tb{}
+
+\begin{center}
+  \begin{tabular}{| c | c | c | c |}
+    \hline
+     \textbf{4096} & \textbf{256} & \textbf{16} & \textbf{1}\\ \hline
+    1 & e & e & 9\\
+    \hline
+  \end{tabular}
+\end{center}
+
+Da det er nemmere at omregne hexadecimal til binæretal, bruger vi tallene fra opgave 1.1\\
+Vi opstiller følgende tabel, så vi nemt og hurtigt kan omregne til binære tal. Vi starter med at ignorer fortegnet på talene.
+\begin{center}
+  \begin{tabular}{ | l | c | c | c |  c |  c |  c |  c |  c |  c |  c |  c |  c |  c | }
+    \hline
+    & 1 & 2 & 4 & 8 & 16 & 32 & 64 & 128 & 256 & 512 & 1024 & 2048 & Sign\\ \hline
+    $0_{16}$ &        0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 \\ \hline
+    $13_{16}$ &      1 & 0 & 1 & 1 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 \\ \hline
+    $314_{16}$ &    0 & 1 &0 & 1 & 1 & 1 & 0 & 0 & 1 & 0 & 0 & 0 & 0 \\ \hline
+    $539_{16}$ &    1 & 0 & 0 & 1 & 1 & 1 & 0 & 0 &1 & 0 & 1 & 0 & 0 \\ \hline
+    $1ee9_{16}$ & 1 & 0 & 0 & 1 & 0 & 1 & 1 & 1 & 0 & 1 & 1 & 1 & 1 \\
+    \hline
+  \end{tabular}
+\end{center}
+
+Vi ser, at  $1ee9_{16}$ er for stort til at blive repræsenteret med 12 bit. Vi har derfor et overflow, når vi omregner  $1ee9_{16}$.\\
+
+Vi ser bort fra overflowet og fortsætter med at konvertere til 12 bit 2-komplement
+\begin{center}
+  \begin{tabular}{ | l | c | c | c |  c |  c |  c |  c |  c |  c |  c |  c |  c |  c | }
+    \hline
+    & 1 & 2 & 4 & 8 & 16 & 32 & 64 & 128 & 256 & 512 & 1024 & 2048 & Sign\\ \hline
+    $0_{16}$ &        0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 \\ \hline
+    $-13_{16}$ &      0 & 1 & 0 & 0 & 1 & 1 & 1 & 1 & 1 & 1 & 1 & 1 & 1 \\ \hline
+    $-314_{16}$ &    1 & 0 & 0 & 0 & 0 & 0 & 1 & 1 & 1 & 1 & 1 & 1 & 1 \\ \hline
+    $-539_{16}$ &    0 & 1 & 1 & 0 & 0 & 0 & 1 & 1 & 0 & 1 & 0 & 1 & 1 \\ \hline
+    $-1ee9_{16}$ &   0 & 1 & 1 & 0 & 1 & 0 & 0 & 0 & 1 & 0 & 0 & 0 & 1 \\
+    \hline
+  \end{tabular}
+\end{center}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+\end{document}
