@@ -1,69 +1,0 @@
-\documentclass[a4,11pt]{article} \usepackage[T1]{fontenc}
-\usepackage[utf8]{inputenc}
-\usepackage{geometry}
-\geometry{letterpaper}\usepackage{graphicx}\usepackage[danish]{babel}\usepackage{amssymb}\usepackage{fancyhdr}\usepackage{amsmath,amssymb}
-\usepackage{comment}
-\usepackage{caption}
-\usepackage{subfigure}
-\usepackage{fixltx2e}
-\usepackage{changepage}
-\usepackage{listings}
-\DeclareUnicodeCharacter{00A0}{ }\pagestyle{fancy}
-
-% http://tex.stackexchange.com/questions/33519/vertical-line-in-matrix-using-latexit
-% Fix for bmatrix
-\makeatletter
-\renewcommand*\env@matrix[1][*\c@MaxMatrixCols c]{%
-  \hskip -\arraycolsep
-  \let\@ifnextchar\new@ifnextchar
-  \array{#1}}
-\makeatother
-
-% My commands
-\newcommand{\equ}[1]{\begin{align}#1\end{align}}\newcommand{\tb}[1]{\textbf{#1}\\}\newcommand{\tsub}[1]{\textsubscript{#1}}\newcommand{\tsup}[1]{\textsuperscript{#1}}
-% End of my commands\begin{document}
-\section{feb2013 - Opgave 1}
-\subsection{}
-\textbf{Konverter følgende decimaltal til binære tal; angiv svaret i 8-bit 2-komplementform: 0, 1, -1, 200, -100.}
-\\\\
-Konverteringerne kan ses i tabellen nedenfor hvor decimaltallet 200 giver et overflow.\\
-Måden vi har konverteret på er ved at sætte 1 i cellerne således at summen af de steder hvor der er 1 giver decimaltallet for hver række. 
-\begin{center}
-\begin{tabular}{| r | c | c | c | c | c | c | c | c |}
-\hline
-   		& Sign 	& 64 & 32 & 16 & 8 & 4 & 2 & 1\\\hline
-  0 		& 0 		& 0 & 0 & 0 & 0 & 0 & 0 & 0 \\\hline
-  1 		& 0 		& 0 & 0 & 0 & 0 & 0 & 0 & 1\\\hline
-  -1 		& 1 		& 1 & 1 & 1 & 1 & 1 & 1 & 1 \\\hline
-  200		& - 		& - & - & - & - & - & - & -\\\hline
-  -100 	& 1 		& 0 & 0 & 1 & 1 & 1 & 0 & 1\\ \hline
-\end{tabular}
-\end{center}
-
-
-\subsection{}
-\textbf{Konverter følgende binære tal angivet i 8-bit 2-komplementform til decimal-tal: 00011000, 01110000, 10000000, 11111111, 10101010.}
-\\\\
-Konverteringerne kan ses i tabellen nedenfor hvor der er regnet omvendt i forhold til opgaven ovenfor.
-\begin{center}
-\begin{tabular}{| r | c | c | c | c | c | c | c | r |}
-\hline
-Sign   	& 64 	& 32 & 16 & 8 & 4 & 2 & 1 & Resultat\\\hline
-0 		& 0 		& 0 & 1 & 1 & 0 & 0 & 0 & 24 \\\hline
-0 		& 1 		& 1 & 1 & 0 & 0 & 0 & 0 & 112\\\hline
-1 		& 0 		& 0 & 0 & 0 & 0 & 0 & 0 & -127 \\\hline
-1		& 1 		& 1 & 1 & 1 & 1 & 1 & 1 & -1\\\hline
-1 		& 0 		& 1 & 0 & 1 & 0 & 1 & 0 & 42\\ \hline
-\end{tabular}
-\end{center}
-
-\subsection{}
-\textbf{Hvilke af følgende beregninger vil give overløb i 8-bit 2-komplementformat: 126+1, 127+2, -128+1, -12*12,-11*(-11).}
-\\\\
-Da det største tal man kan repræsenterer med 7-bit(da vi bruger 1-bit til fortegn) er:
-$$1+2+4+8+16+32+64=128$$
-Vil den eneste beregning der giver overløb være 127+2.\\
-\\
--128+1 kan godt lade sig gøre da det mindste tal vi kan repræsenterer er -127.
-
-\end{document}
