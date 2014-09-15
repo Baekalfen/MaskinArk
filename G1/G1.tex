@@ -1,4 +1,54 @@
 \documentclass[a4paper,11pt]{article}
+
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage{geometry}
+\geometry{letterpaper}\usepackage{graphicx}\usepackage[danish]{babel}\usepackage{amssymb}\usepackage{fancyhdr}\usepackage{amsmath,amssymb}
+\usepackage{comment}
+\usepackage{caption}
+\usepackage{subfigure}
+\usepackage{fixltx2e}
+\usepackage{changepage}
+\usepackage{listings}
+\DeclareUnicodeCharacter{00A0}{ }\pagestyle{fancy}
+
+% http://tex.stackexchange.com/questions/33519/vertical-line-in-matrix-using-latexit
+% Fix for bmatrix
+\makeatletter
+\renewcommand*\env@matrix[1][*\c@MaxMatrixCols c]{%
+  \hskip -\arraycolsep
+  \let\@ifnextchar\new@ifnextchar
+  \array{#1}}
+\makeatother
+
+% My commands
+\newcommand{\equ}[1]{\begin{align}#1\end{align}}\newcommand{\tb}[1]{\textbf{#1}\\}\newcommand{\tsub}[1]{\textsubscript{#1}}\newcommand{\tsup}[1]{\textsuperscript{#1}}
+% End of my commands
+
+
+
+
+
+
+
+
+% --------------------------- MADS MANGLER PAKKER --------------------------------
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 \newcommand{\Fag}{Matematik}
 \newcommand{\Navn}{Mads~Ynddal}
 \newcommand{\Skole}{Roskilde~Tekniske~Gymnasium}
@@ -14,8 +64,6 @@
 
 \newcommand{\degree}{\ensuremath{^\circ}}
 \usepackage[british,danish]{babel}
-\usepackage{textcomp}
-\usepackage{amsmath}
 \usepackage{amssymb}
 \usepackage{graphicx}
 \usepackage{calc}
@@ -154,7 +202,7 @@ Vi opstiller følgende tabel, så vi nemt og hurtigt kan omregne til binære tal
     & Sign & 2048 & 1024 & 512 & 256 & 128 & 64 & 32 & 16 & 8 & 4 & 2 & 1\\ \hline
     $0_{16}$ &        0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 \\ \hline
     $D_{16}$ &      0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 1 & 1 & 0 & 1 \\ \hline
-    $FORKERT$ &   0 & 0 & 0 & 1 & 1 & 0 & 0 & 0 & 1 & 0 & 1 & 0 & 0 \\ \hline
+    $13D_{16}$ &    0&0&0&0&1&0&0&1&1&1&1&1&0 \\ \hline
     $539_{16}$ &   0 & 0 & 1 & 0 & 1 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 \\ \hline
     $1DD9_{16}$ & 1 & 1 & 1 & 1 & 1 & 0 & 0 & 1 & 0 & 1 & 0 & 0 & 1 \\
     \hline
@@ -167,11 +215,10 @@ Vi ser bort fra $-1DD9_{16}$ og fortsætter med at konvertere til 12 bit 2-kompl
 \begin{center}
   \begin{tabular}{ | l | c | c | c |  c |  c |  c |  c |  c |  c |  c |  c |  c |  c | }
    \hline
-    FORKERT
     & Sign & 2048 & 1024 & 512 & 256 & 128 & 64 & 32 & 16 & 8 & 4 & 2 & 1\\ \hline
     $0_{16}$ &         0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 \\ \hline
     $-D_{16}$ &     1 & 1 & 1 & 1 & 1 & 1 & 1 & 1 & 1 & 0 & 0 & 1 & 0 \\ \hline
-    $FORKERT$ &   1 & 1 & 1 & 0 & 0 & 1 & 1 & 1 & 0 & 1 & 1 & 0 & 0 \\ \hline
+    $13D_{16}$ &   1&1&1&1&0&1&1&0&0&0&0&1&0 \\ \hline
     $-539_{16}$ &   1 & 1 & 0 & 1 & 1 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 \\ \hline
     $-1DD9_{16}$ & 1 & - & - & - & - & - & - & - & - & - & - & - & - \\ \hline
   \end{tabular}
