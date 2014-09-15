@@ -29,8 +29,24 @@
 
 Konverter følgende fem decimaltal til hexadecimaltal: 0, 13, 314, 1337, 7913. Giv alle svarene på tre cifre.
 
+Det kræver ingen udregninger at konvertere $0$ og $13$ til hexadecimal, da hexadecimals første ciffer går op til 16. Vi kan derfor blot skrive: 
+$$0_{10} = 0_{16}$$
+$$13_{10} = D_{16}$$
+Dette er dog ikke tilfældet med $314_{10}$, som kræver en regning. Vi dividere 314 med 16 og dividere resultatet af det med 16 igen, indtil at delresultatet bliver mindre end 16.
+$$314_{10}/16 = 19 + \frac{10}{16}$$
+$$19/16 = 1 + \frac{3}{16}$$
+$$1/16 = \frac{1}{16}$$
 
+Da $1 < 16$, kan vi ikke regne videre, og må derfor aflæse resultatet. Tælleren af den første brøk er vores ``1'ere'', den næste brøks tæller er vores ``16'ere'' osv. Vi får derfor:
+$$314_{10} = 13D_{16}$$
 
+Omregningen af $1337_{10}$ foregår på samme måde:
+$$1337_{10}/16 = 83 + \frac{9}{16}$$
+$$83_{10}/16 = 5 + \frac{3}{16}$$
+$$5_{10}/16 = \frac{5}{16}$$
+$$1337_{10} = 539_{16}$$
+
+Det sidste tal er $7913_{10}$, men da det største tal vi kan repræsentere med hexadecimal er $256*16+16*16+1*16 = 4.368_{10}$, kan vi ikke omregne $7913_{10}$.
 
 \subsection{b)}
 \tb{}
@@ -51,7 +67,7 @@ $$ DAD_{16} = 14 * 256 + 10 * 16 + 14 * 1 = 3758_{10}$$
   \begin{tabular}{| c | c | c | c |}
     \hline
      \textbf{4096} & \textbf{256} & \textbf{16} & \textbf{1}\\ \hline
-    1 & e & e & 9\\
+    1 & E & E & 9\\
     \hline
   \end{tabular}
 \end{center}
@@ -61,31 +77,35 @@ Vi opstiller følgende tabel, så vi nemt og hurtigt kan omregne til binære tal
 \begin{center}
   \begin{tabular}{ | l | c | c | c |  c |  c |  c |  c |  c |  c |  c |  c |  c |  c | }
     \hline
-    & 1 & 2 & 4 & 8 & 16 & 32 & 64 & 128 & 256 & 512 & 1024 & 2048 & Sign\\ \hline
+    & Sign & 2048 & 1024 & 512 & 256 & 128 & 64 & 32 & 16 & 8 & 4 & 2 & 1\\ \hline
     $0_{16}$ &        0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 \\ \hline
-    $13_{16}$ &      1 & 0 & 1 & 1 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 \\ \hline
-    $314_{16}$ &    0 & 1 &0 & 1 & 1 & 1 & 0 & 0 & 1 & 0 & 0 & 0 & 0 \\ \hline
-    $539_{16}$ &    1 & 0 & 0 & 1 & 1 & 1 & 0 & 0 &1 & 0 & 1 & 0 & 0 \\ \hline
-    $1ee9_{16}$ & 1 & 0 & 0 & 1 & 0 & 1 & 1 & 1 & 0 & 1 & 1 & 1 & 1 \\
+    $D_{16}$ &      0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 1 & 1 & 0 & 1 \\ \hline
+    $FORKERT$ &   0 & 0 & 0 & 1 & 1 & 0 & 0 & 0 & 1 & 0 & 1 & 0 & 0 \\ \hline
+    $539_{16}$ &   0 & 0 & 1 & 0 & 1 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 \\ \hline
+    $1DD9_{16}$ & 1 & 1 & 1 & 1 & 1 & 0 & 0 & 1 & 0 & 1 & 0 & 0 & 1 \\
     \hline
   \end{tabular}
 \end{center}
 
-Vi ser, at  $1ee9_{16}$ er for stort til at blive repræsenteret med 12 bit. Vi har derfor et overflow, når vi omregner  $1ee9_{16}$.\\
+Vi ser, at  $1DD9_{16}$ er for stort til at blive repræsenteret med 12 bit. Vi har derfor et overflow, når vi omregner  $1DD9_{16}$.\\
 
-Vi ser bort fra overflowet og fortsætter med at konvertere til 12 bit 2-komplement
+Vi ser bort fra $-1DD9_{16}$ og fortsætter med at konvertere til 12 bit 2-komplement
 \begin{center}
   \begin{tabular}{ | l | c | c | c |  c |  c |  c |  c |  c |  c |  c |  c |  c |  c | }
-    \hline
-    & 1 & 2 & 4 & 8 & 16 & 32 & 64 & 128 & 256 & 512 & 1024 & 2048 & Sign\\ \hline
-    $0_{16}$ &        0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 \\ \hline
-    $-13_{16}$ &      0 & 1 & 0 & 0 & 1 & 1 & 1 & 1 & 1 & 1 & 1 & 1 & 1 \\ \hline
-    $-314_{16}$ &    1 & 0 & 0 & 0 & 0 & 0 & 1 & 1 & 1 & 1 & 1 & 1 & 1 \\ \hline
-    $-539_{16}$ &    0 & 1 & 1 & 0 & 0 & 0 & 1 & 1 & 0 & 1 & 0 & 1 & 1 \\ \hline
-    $-1ee9_{16}$ &   0 & 1 & 1 & 0 & 1 & 0 & 0 & 0 & 1 & 0 & 0 & 0 & 1 \\
-    \hline
+   \hline
+    FORKERT
+    & Sign & 2048 & 1024 & 512 & 256 & 128 & 64 & 32 & 16 & 8 & 4 & 2 & 1\\ \hline
+    $0_{16}$ &         0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 \\ \hline
+    $-D_{16}$ &     1 & 1 & 1 & 1 & 1 & 1 & 1 & 1 & 1 & 0 & 0 & 1 & 0 \\ \hline
+    $FORKERT$ &   1 & 1 & 1 & 0 & 0 & 1 & 1 & 1 & 0 & 1 & 1 & 0 & 0 \\ \hline
+    $-539_{16}$ &   1 & 1 & 0 & 1 & 1 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 \\ \hline
+    $-1DD9_{16}$ & 1 & - & - & - & - & - & - & - & - & - & - & - & - \\ \hline
   \end{tabular}
 \end{center}
+
+
+
+
 
 
 
