@@ -1,0 +1,17 @@
+En simpel test, der tester forwarding ved sw lw.
+OBS Denne test virker ikke i MARS.
+
+Resultatet er, at register 8 til 12 viser:
+4
+4
+5
+4
+4
+
+Hvad kan der gå galt:
+
+Hvis register 10 ikke viser 5.
+Det handler om forwarding for register A.
+
+Hvis register 12 ikke viser 4.
+Det handler om forwarding for register B.

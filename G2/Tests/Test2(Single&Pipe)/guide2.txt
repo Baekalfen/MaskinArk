@@ -1,0 +1,14 @@
+En simpel test, der tester SW.
+OBS denne test kører ikke rigtigt i MARS.
+
+Resultatet er at register 8 til 13 og data-memory begge viser:
+4
+6
+9
+11
+17
+1f
+
+Hvad kan være galt:
+
+Adressen bliver beregnet forkert (register + const).

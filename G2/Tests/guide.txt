@@ -1,0 +1,33 @@
+Hver test har sin egen guide.
+
+Nogle test virker for både single-cycle og pipeline.
+
+Nogle virker kun for pipeline.
+
+Mapperne er navngivet, så man kan se hvad testen kan bruges til.
+
+Alle tests forudsætter, at alle komponenter er nulstillet (ctrl-R).
+
+Det er også forventet at testene bliver taget i rækkefølge,
+da de senere tests afhænger af at de tidligere virkede.
+
+Man loader en test ved at:
+
+Vælge Instruction memory med pilen
+Trykke på "(click here to edit)" under atributter
+Tryk "Load Program" i pop-up vinduet
+Find testen og tryk "open"
+Tryk "Close Window"
+Tryk eventuelt ctrl-R for at resette
+
+I burde nu kunne se programmet på jeres Instruction memory.
+Hvis ikke det virker, kan det hjælpe at genstarte Logisim og prøve igen.
+
+I kan både køre hele programmet ved bare at lade clocken tikke.
+Men I kan også køre programmerne en instruktionen ved at tikke to tik af gangen.
+
+Husk, at I kan debugge ved, at trykke med hånden på ledningerne,
+og se om værdien af ledningen er det forventede.
+
+Hvis alle tests lykkedes, kan I ikke sige, at jeres kredsløb er fejlfri,
+men det er en god indikator ;)

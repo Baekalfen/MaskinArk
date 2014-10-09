@@ -1,0 +1,25 @@
+En simpel test, der tester alle de operationer, der kun bruger ALU.
+
+Resultatet er, at register 8 til 21 viser:
+4
+6
+9
+11
+17
+1f
+a
+2
+1
+1
+4
+4
+6
+6
+
+Hvad kan være galt:
+
+ALU'en får forkerte kontrolsignaler.
+Tjek, om I har udfyldt PLA'en korrekt (hvis I bruger en PLA i jeres kontrolenhed).
+
+I bruger funct til at bestemme funktionen ved immediate operationer.
+Sørg for, at funktionen kommer fra opcode ved immediate operationer.

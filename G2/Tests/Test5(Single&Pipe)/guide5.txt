@@ -1,0 +1,41 @@
+En simpel test, der tester jal og jr.
+Den giver forskellige resultater ved single og pipe.
+Det er en god ide at tage instruktionerne en ad gangen,
+og se om der sker det forventede.
+
+
+Single-cycle:
+
+Resultatet er, at register 8 og 9 viser 6.
+
+Hvad kan gå galt:
+
+Hvis register 8 og 9 viser 5.
+Det er formentlig fordi jal ikke hopper.
+
+Hvis register 16 og 17 viser 5.
+Hvis register 8 og 9 viser 1.
+Det er formentlig fordi jr ikke hopper,
+eller fordi jal ikke gemmer return adress til $ra.
+
+Hvis programmet kører i uendelig løkke.
+Det er formentlig fordi jal gemmer PC til $ra
+i stedet for at gemme PC+4 til $ra.
+
+
+Pipeline:
+
+Resultatet er, at register 8 viser 1,
+register 9 viser 6
+og register 10 og 16 viser 5.
+
+Hvad kan gå galt:
+
+Hvis register 8 viser 6.
+Det er formentlig fordi, at jal gemmer PC+4 i stedet for PC+8 til $ra.
+
+Hvis register 10 ikke viser 5.
+Det er formentlig fordi, at branch-delay-slot ikke virker for jal.
+
+Hvis register 16 ikke viser 5.
+Det er formentlig fordi, at branch-delay-slot ikke virker for jr.

@@ -1,0 +1,18 @@
+Test 6 til 8 er simple tests, der der skal teste forwarding.
+
+Resultatet er i alle tilfælde at register 8 til 11 viser 4.
+
+Hvad kan gå galt:
+
+Test 6 burde ikke gå galt, med mindre,
+der er pillet ved hvornår registrene opdaterer.
+
+Test 7 tester forwarding over 2 pipes.
+
+Test 8 tester forwarding over 1 pipe.
+
+Hvis register 9 viser 0.
+Der er problemer med forwarding af register A.
+
+Hvis register 11 viser 0.
+Der er problemer med forwarding af register B.
