@@ -1,38 +1,35 @@
-#
-# int fib(int n)
-# {
-#     if (n == 0)
-#        return 0;
-#     else if (n == 1)
-#         return 1;
-#     else
-#         return fib(n-1) + fib(n-2);
-# }
-	
-		
 	j    main
 
 fib:	# Save to stack
-	addi $sp, $sp, -12
-   	sw   $ra, 8($sp)
-	sw   $a0, 4($sp)
-   	sw   $v0, 0($sp)
+	addi $sp, $sp, -12     # Make room in stack
+   	sw   $ra, 8($sp)       # Save $ra to stack
+	sw   $a0, 4($sp)       # Save $a0 to stack
+   	sw   $v1, 0($sp)       # Save $s0 to stack
     
 	# Calculate
-	ble  $a0, 1, innerloop   # if n <= 1: goto innerloop
+	ble  $a0, 1, setV0     # if n <= 1: goto innerloop
 	
-	addi $a0,$a0,-2
-	
-	# Recur
-	# Recur
+	addi $a0, $a0, -1      # Decrement n by 1
+	jal  fib               # Recur 1
+	add  $v1, $zero, $v0   # Save return value to $s0 !!! Maybe not
+	lw   $a0, 4($sp)       # Restore n from stack
+	addi $a0, $a0, -2      # Decrement n by 2
+	jal  fib               # Recur 2
+	add  $v0, $v1, $v0     # Add fib(n-1) and fib(n-2)
+	j innerloop
 
+setV0:
+	add  $v0,$zero,$a0     # Place $a0 in $v0
+	# Continues to innerloop
 
 innerloop:
-	add  $v0,$zero,$a0
-	j    fib
-	# Calculate
-	# Save to stack
+	lw   $ra, 8($sp)       # Restore $ra
+	lw   $v1, 0($sp)       # Restore $s0
+	addi $sp, $sp, 12      # Close stack
+	
+	jr   $ra               # Return to $ra
 
 
-main:  	addi $a0,$zero,6 	# init n as a0 to its start value
-	jal  fib                # jump to the fib function (label)
+main:  	addi $a0,$zero,10
+	jal  fib
+	nop
