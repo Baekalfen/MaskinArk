@@ -208,7 +208,8 @@ This file is intended to be loaded by Logisim (http://www.cburch.com/logisim/).
       <a name="out_width" val="9"/>
       <a name="truth_table">001001,101100000#addiu
 000000,011000001#addu/subu/slt/and
-001010,001100000#slti</a>
+001010,001100000#slti
+001100,101100000#andi</a>
       <a name="label" val="Control"/>
     </comp>
     <comp lib="0" loc="(690,490)" name="Tunnel">
@@ -462,14 +463,14 @@ ori   $s5, $t0, 6
 00xxxxxx,0111#slti
 01101010,0111#slt
 01100100,1000#and
-00000000,0000#or
+00000000,0000#andi
 00000000,0000#ori
 00000000,0000#lw
 00000000,0000#sw
 00000000,0000#beq
 00000000,0000#jal
 00000000,0000#jr
-00000000,0000#andi</a>
+00000000,0000#or</a>
     </comp>
   </circuit>
 </project>
