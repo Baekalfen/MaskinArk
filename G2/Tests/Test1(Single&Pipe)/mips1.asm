@@ -18,7 +18,8 @@ addiu $s2, $zero, 2
 and   $s2, $t0, $t1
 and   $s2, $t0, $t1
 andi  $s3, $t0, 6
-andi  $s3, $t0, 6
+addiu $s3, $zero, 6
+andi  $s3, $s3, 4
 or    $s4, $t0, $t1
 or    $s4, $t0, $t1
 ori   $s5, $t0, 6
