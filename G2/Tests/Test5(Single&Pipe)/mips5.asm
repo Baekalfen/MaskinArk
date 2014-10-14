@@ -3,7 +3,6 @@ addiu $t0, $t0, 16
 jr    $t0
 nop
 addiu $t0, $t0, 5
-jal   test
 addiu $t0, $t0, 5
 addiu $t1, $t1, 5
 
@@ -24,7 +23,7 @@ addiu $t0, $zero, 1
 addiu $t1, $zero, 1
 nop
 nop
-nop
+beq   $t1, $zero, end
 nop
 nop
 jr    $ra
