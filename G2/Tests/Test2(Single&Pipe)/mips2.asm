@@ -7,14 +7,8 @@ addiu $t3, $zero, 17
 addiu $t4, $zero, 23
 addiu $t5, $zero, 31
 sw    $t0, 0($zero)
-sw    $t0, 0($zero)
-sw    $t1, 4($zero)
 sw    $t1, 4($zero)
 sw    $t2, 8($zero)
-sw    $t2, 8($zero)
-sw    $t3, 12($zero)
 sw    $t3, 12($zero)
 sw    $t4, 16($zero)
-sw    $t4, 16($zero)
-sw    $t5, 20($zero)
 sw    $t5, 20($zero)

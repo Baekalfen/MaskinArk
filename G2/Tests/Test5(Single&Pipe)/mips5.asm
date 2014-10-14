@@ -1,8 +1,6 @@
 # addu, addiu, slt, slti, subu, and, andi, or, ori, lw, sw, beq, jal, jr
-addiu $t0, $t0, 16
-jr    $t0
-nop
-addiu $t0, $t0, 5
+
+jal   test
 addiu $t0, $t0, 5
 addiu $t1, $t1, 5
 
@@ -12,7 +10,6 @@ nop
 nop
 
 test:
-addiu $t2, $t0, 0
 nop
 nop
 nop
@@ -23,7 +20,7 @@ addiu $t0, $zero, 1
 addiu $t1, $zero, 1
 nop
 nop
-beq   $t1, $zero, end
+nop
 nop
 nop
 jr    $ra
