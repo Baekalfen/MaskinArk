@@ -23,9 +23,11 @@
 \newcommand{\equ}[1]{\begin{align}#1\end{align}}\newcommand{\tb}[1]{\textbf{#1}\\}\newcommand{\tsub}[1]{\textsubscript{#1}}\newcommand{\tsup}[1]{\textsuperscript{#1}}
 
 \newcommand{\Lim}[1]{\raisebox{0.5ex}{\scalebox{0.8}{$\displaystyle \lim_{#1}\;$}}}
-% End of my commands\fancyhead[LE,RO]{Header}
-\title{Lala\\~\\
-	\Large{Troels Ynddal\\ QWV828}}\begin{document}
+% End of my commands\title{  \vspace{-3em}  {\Large \underline {Københavns Universitet}} \\  {\Large Maskinarkitektur} \\ % Kursus \vspace{7em} \hrulefill \\ { \huge \bfseries G2 \\[0.1cm] }\hrulefill}\author{\Large {Gruppe:} \\ Asger Lund Hansen (CMG881) og Mads Ynddal (SJT402)\\ og Troels Ynddal (QWV828)}\date{\vfill\today}
+
+\rhead{\today}\lhead{Maskinarkitektur 2014}
+
+\begin{document}
 
 \maketitle
 \newpage
@@ -76,21 +78,33 @@ Branch delay slot er supporteret ved at \texttt{beq} først bliver afgjort i \te
 
 
 
-\subsection{Test 1}
-\subsection{Test 2}
-\subsection{Test 3}
-\subsection{Test 4}
-\subsection{Test 5}
-\subsection{Test 6 \& 7 \& 8}
-\subsection{Test 9}
 
 
+\begin{center}
+\begin{tabular}{| c | c | c | }
+    \hline
+    	Test 1 & Test 2 & Test 3 \\ \hline
+	\includegraphics[width=0.15\textwidth]{1.png} &
+	\includegraphics[width=0.15\textwidth]{r2.png}
+	\includegraphics[width=0.15\textwidth]{2.png} & 
+	\includegraphics[width=0.15\textwidth]{3.png}
+	\includegraphics[width=0.15\textwidth]{2.png} \\
+    \hline
+\end{tabular}
+\begin{tabular}{| c | c | c | c | c | }
+    \hline
+    	Test 4 & Test 5 & Test 6, 7 og 8 & Test 9 \\ \hline
+	\includegraphics[width=0.15\textwidth]{4.png} &
+	\includegraphics[width=0.15\textwidth]{5.png} &
+	\includegraphics[width=0.15\textwidth]{6-7-8.png} &
+	\includegraphics[width=0.15\textwidth]{9.png}
+	\includegraphics[width=0.15\textwidth]{s9.png}\\
+    \hline
+\end{tabular}
 
+\end{center}
 
-
-
-
-
+Vi har udført de tests der blev udleveret med opgaven. Vi har håndkørt alle testene og sammenlignet dette med resultatet fra både vores Single Cycle og Pipeline. Alle testene giver det resultat, vi havde forventet.
 
 
 
