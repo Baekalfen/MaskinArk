@@ -1,14 +1,21 @@
-\documentclass[12pt, a4paper]{article}\usepackage[T1]{fontenc}
+\documentclass[12pt, a4paper]{article}
+\usepackage[T1]{fontenc}
 \usepackage[utf8]{inputenc}
 \usepackage{geometry}
-\geometry{letterpaper}\usepackage{graphicx}\usepackage[danish]{babel}\usepackage{amssymb}\usepackage{fancyhdr}\usepackage{amsmath,amssymb}
+\geometry{letterpaper}
+\usepackage{graphicx}
+\usepackage[danish]{babel}
+\usepackage{amssymb}
+\usepackage{fancyhdr}
+\usepackage{amsmath,amssymb}
 \usepackage{comment}
 \usepackage{caption}
 \usepackage{subfigure}
 \usepackage{fixltx2e}
 \usepackage{changepage}
 \usepackage{listings}
-\DeclareUnicodeCharacter{00A0}{ }\pagestyle{fancy}
+\DeclareUnicodeCharacter{00A0}{ }
+\pagestyle{fancy}
 
 % http://tex.stackexchange.com/questions/33519/vertical-line-in-matrix-using-latexit
 % Fix for bmatrix
@@ -20,14 +27,36 @@
 \makeatother
 
 % My commands
-\newcommand{\equ}[1]{\begin{align}#1\end{align}}\newcommand{\tb}[1]{\textbf{#1}\\}\newcommand{\tsub}[1]{\textsubscript{#1}}\newcommand{\tsup}[1]{\textsuperscript{#1}}
+\newcommand{\equ}[1]{\begin{align}#1\end{align}}
+\newcommand{\tb}[1]{\textbf{#1}\\}
+\newcommand{\tsub}[1]{\textsubscript{#1}}
+\newcommand{\tsup}[1]{\textsuperscript{#1}}
 
 \newcommand{\Lim}[1]{\raisebox{0.5ex}{\scalebox{0.8}{$\displaystyle \lim_{#1}\;$}}}
-% End of my commands\title{  \vspace{-3em}  {\Large \underline {Københavns Universitet}} \\  {\Large Maskinarkitektur} \\ % Kursus \vspace{7em} \hrulefill \\ { \huge \bfseries G2 \\[0.1cm] }\hrulefill}\author{\Large {Gruppe:} \\ Asger Lund Hansen (CMG881) og Mads Ynddal (SJT402)\\ og Troels Ynddal (QWV828)}\date{\vfill\today}
+% End of my commands
 
-\rhead{\today}\lhead{Maskinarkitektur 2014}
+\title{
+  \vspace{-3em}
+  {\Large \underline {Københavns Universitet}} \\
+  {\Large Maskinarkitektur} \\ % Kursus
+ \vspace{7em}
+ \hrulefill \\
+ { \huge \bfseries G2 \\[0.1cm] }
+\hrulefill
+}
+\author{\Large {Gruppe:} \\ 
+Asger Lund Hansen (CMG881) og Mads Ynddal (SJT402)\\ og Troels Ynddal (QWV828)
+}
 
-\begin{document}
+\date{
+\vfill
+\today
+}
+
+\rhead{\today}
+\lhead{Maskinarkitektur 2014}
+
+\begin{document}
 
 \maketitle
 \newpage
@@ -45,14 +74,14 @@ Sidst men ikke mindst skal jeres rapport indeholde en beskrivelse af jeres tests
 Efter at en instruktion er blevet indlæst fra `Program Registeret', bliver instruktionens \texttt{opcode} dekodet af `Control' PLA'en. `Control' understøtter følende instruktioner:\\
 \texttt{addu, addiu, slt, slti, subu, and, andi, or, ori, lw, sw, beq, jal, jr}\\
 
-R-type instruktionerne har ikke nogen unik `opcode' (opcode'en er altid $00000$), så de bliver sendt videre, til dekodning i \texttt{EX}.
+R-type instruktionerne har ikke nogen unik `opcode' (opcode'en er altid $00000$), så de bliver sendt videre, til dekodning i \texttt{EX-stage}.
 Det vil sige, at instruktionerne \texttt{addiu, slti, andi, ori, lw, sw, beq} og \texttt{jal} dekodes af `Control'. Dekodning består i at sætte de 9 kontrol-flag. De 9 flag bruges af hvert pipeline stage til at justere ALU, MUX og lignende. 
 
 Foruden `Control' bliver instruktionen også splittet op og sendt til \texttt{rd}, register, Hazard Detection og Immediate. \texttt{rd} bruges til Hazard Detection, så den kan holde øje med hvilke registeradresser der bliver skrevet til og hvornår.
 
 I \texttt{EX} bliver R-type instruktionerne dekodet. Da de ikke har en `opcode', skal vi dekode dem ved at læse deres `funct'. Til dette har vi lavet kredsløbet `ALUOp', som bl.a. kan læse `funct' og indstille ALU'en korrekt. Det er desuden `ALUOp', som sørger for jumps og branches bliver udregnet korrekt.
 
-Branches bliver tjekket ved at trække to registre fra hinanden og se op ALU'ens \texttt{Zero}-flag bliver sat. Hvis de to registre ellers er ens, tjekker den, om `Branch'-flaget fra `Control' er sat. Hvis begge disse betingelser er sande, vil den aktivere en branch.
+Branch-on-equal (\texttt{beq}) bliver tjekket ved at trække to registre fra hinanden og se op ALU'ens \texttt{Zero}-flag bliver sat. Hvis de to registre ellers er ens, tjekker den, om `Branch'-flaget fra `Control' er sat. Hvis begge disse betingelser er sande, vil den aktivere en branch.
 
 
 \section{Stall}
@@ -60,18 +89,18 @@ Det er lykkedes at lave et kredsløb, som kun stall'er, hvis det er nødvendigt.
 
 \section{Hazard}
 
-Vi har lavet vores Data Hazard ved at sammenligne instruktionen i \texttt{ID} med instruktionerne i de følgende `pipeline stages'. Hvis registeret i \texttt{ID} er ved at blive ændret på, i en anden instruktion, vil den sætte "Hazard" flaget `høj'.
+Vi har lavet vores Data Hazard ved at sammenligne instruktionen i \texttt{ID} med instruktionerne i de følgende `pipeline stages'. Hvis registeret i \texttt{ID} er ved at blive ændret på, i en anden instruktion, vil den sætte "Hazard" flaget `højt'.
 
 Dette kan vi bruge i vores `Forwarding', til at finde frem til den nyeste instans af registeret.
 
 
 \section{Forwarding}
 
-Forwarding sker ved, at vi har en `tunnel' forbundet til slutningen af hvert `pipeline stage', så vi kan hente et resultat, som endnu ikke er blevet skrevet tilbage i registeret. Vores forwarding sker umiddelbart efter, at vi har læst fra registeret. Vi kan vha. to `mux'er', vælge om vi vil bruge værdien fra registeret, eller om vi vi forwarde en værdi fra \texttt{EX}, \texttt{MEM} eller \texttt{WB}.
+Forwarding sker ved, at vi har en `tunnel' forbundet til slutningen af hvert `pipeline stage', så vi kan hente et resultat, som endnu ikke er blevet skrevet tilbage i registeret. Vores forwarding sker umiddelbart efter, at vi har læst fra registeret. Vi kan vha. to multipleksere, vælge om vi vil bruge værdien fra registeret, eller om vi vi forwarde en værdi fra \texttt{EX}, \texttt{MEM} eller \texttt{WB}.
 
 
 \section{Branch delay slot}
-Branch delay slot er supporteret ved at \texttt{beq} først bliver afgjort i \texttt{EX}-stage og derfor vil den næste instruktion nå at blive læst ind i \texttt{ID}-stage. Instruktion i \texttt{ID} bliver ikke afbrudt, fortsætter med at blive udført, hvilket giver os ét Branch delay slot.
+Branch delay slot er supporteret ved at \texttt{beq},\texttt{jal} og \texttt{jr} først bliver afgjort i \texttt{EX}-stage og derfor vil den næste instruktion nå at blive læst ind i \texttt{ID}-stage. Instruktion i \texttt{ID} bliver ikke afbrudt, men fortsætter med at blive udført, hvilket giver os ét Branch delay slot.
 
 
 \section{Test}
@@ -84,21 +113,21 @@ Branch delay slot er supporteret ved at \texttt{beq} først bliver afgjort i \te
 \begin{tabular}{| c | c | c | }
     \hline
     	Test 1 & Test 2 & Test 3 \\ \hline
-	\includegraphics[width=0.15\textwidth]{1.png} &
-	\includegraphics[width=0.15\textwidth]{r2.png}
-	\includegraphics[width=0.15\textwidth]{2.png} & 
-	\includegraphics[width=0.15\textwidth]{3.png}
-	\includegraphics[width=0.15\textwidth]{2.png} \\
+	\includegraphics[width=0.14\textwidth]{1.png} &
+	\includegraphics[width=0.14\textwidth]{r2.png}
+	\includegraphics[width=0.14\textwidth]{2.png} & 
+	\includegraphics[width=0.14\textwidth]{3.png}
+	\includegraphics[width=0.14\textwidth]{2.png} \\
     \hline
 \end{tabular}
 \begin{tabular}{| c | c | c | c | c | }
     \hline
     	Test 4 & Test 5 & Test 6, 7 og 8 & Test 9 \\ \hline
-	\includegraphics[width=0.15\textwidth]{4.png} &
-	\includegraphics[width=0.15\textwidth]{5.png} &
-	\includegraphics[width=0.15\textwidth]{6-7-8.png} &
-	\includegraphics[width=0.15\textwidth]{9.png}
-	\includegraphics[width=0.15\textwidth]{s9.png}\\
+	\includegraphics[width=0.14\textwidth]{4.png} &
+	\includegraphics[width=0.14\textwidth]{5.png} &
+	\includegraphics[width=0.14\textwidth]{6-7-8.png} &
+	\includegraphics[width=0.14\textwidth]{9.png}
+	\includegraphics[width=0.14\textwidth]{s9.png}\\
     \hline
 \end{tabular}
 
